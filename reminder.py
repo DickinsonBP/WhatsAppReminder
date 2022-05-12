@@ -14,7 +14,7 @@ try:
   for number,name in numbers.items():
     print("sending message to: "+name)
     # Sending a WhatsApp message to the number XXXXXX with the message "Mensaje De Prueba" at 14:30.
-    pwk.sendwhatmsg(number,"Hola "+name+"! Mañana me cobran Spotify lol acuerdate de pagarme 2.5 ty :P",14,min)
+    pwk.sendwhatmsg(number,"Hola "+name+"! Esto es un mensaje!!!",14,min)
     print("The message has been sent")
     min+=1
     time.sleep(5)

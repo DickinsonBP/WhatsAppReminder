@@ -1,0 +1,2 @@
+pywhatkit==5.3
+flask==2.1.2

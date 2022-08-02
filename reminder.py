@@ -1,28 +1,19 @@
-import os
-import webbrowser
-import pyautogui
-import time
-import pywhatkit as pwk
-try:
-  numbers = {'+number1':'name1',
-            '+number2':'name2',
-            '+number3':'name3',
-            '+number4':'name4',
-            '+number5':'name5',}
-  #hour,min = time.strftime('%H:%M', time.localtime()).split(':')#return a string
-  min=30
-  for number,name in numbers.items():
-    print("sending message to: "+name)
-    # Sending a WhatsApp message to the number XXXXXX with the message "Mensaje De Prueba" at 14:30.
-    pwk.sendwhatmsg(number,"Hola "+name+"! Esto es un mensaje!!!",14,min)
-    print("The message has been sent")
-    min+=1
-    time.sleep(5)
-    pyautogui.hotkey('ctrl', 'w')
-  
-  # Killing the chrome process.
-  print("Mensajes Enviado") 
+import requests
+from requests.structures import CaseInsensitiveDict
 
-except Exception as e: 
 
-  print("Ha ocurrido un error --> "+str(e))
+
+
+url = "https://graph.facebook.com/v13.0/103347919147898/messages"
+
+headers = CaseInsensitiveDict()
+headers["Authorization"] = "Bearer EAAHDZC1VSkZB0BALvKqzR7H7Vibgda5rY1uixAbuTjoAJrlZCOMCq55u7Kw2ZATBRgRVdWSXmlA1wMvsjnxxmS6wE5YgFxUtTzMDDITGSKEb11ZCWazyIviQGhs3eRyYCIZCCJxsUWJD56iDGzbmoda2gNWRK1OX8hoZBudaonJc53NXv5kMuMI6iJ9W1li0Aw9JU822W9PcgZDZD"
+headers["Content-Type"] = "application/json"
+
+for number, name in numbers.items():
+    data = '{ "messaging_product": "whatsapp", "to": "%s", "type": "template", "template": { "name": "message_reminder", "language": { "code": "es_ES" } } }'% number
+
+    resp = requests.post(url, headers=headers, data=data)
+
+    print(resp.status_code)
+    print(resp.text)
